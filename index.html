@@ -1,0 +1,70 @@
+<html>
+<head>
+  <title>Skiresorts</title>
+</head>
+<body>
+<script type="application/javascript">
+function jsonp(url, callback) {
+    var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+    window[callbackName] = function(data) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        callback(data);
+    };
+
+    var script = document.createElement('script');
+    script.onerror = function(err) {
+      console.log(err);
+    }
+    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+    document.body.appendChild(script);
+}
+
+jsonp('http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime(), function(data) {
+   console.log(data);
+});
+
+var xhr = new XMLHttpRequest();
+xhr.open('POST', 'http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
+xhr.withCredentials = true;
+xhr.setRequestHeader('Content-Type', 'text/plain');
+xhr.send('bla');
+
+
+var APP_ID = 'bd9d6bce';
+var APP_KEY = '48d079c8931bfcd142bdfabfb2a2d949';
+
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    console.log(this);
+  }
+};
+//http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949
+xhr.open('GET','http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
+xhr.send();
+
+console.log('yo');
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+
+    $.ajax({
+        url: "https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949",
+        type: "GET",
+        success: function (parsedResponse, statusText, jqXhr) {
+
+            console.log(parsedResponse);
+
+        },
+        error: function (error) {
+
+            console.log(error);
+        }
+    });
+
+</script>
+</body>
+</html>
