@@ -8,6 +8,7 @@
   <h3>Last Snowfall: <span id="last-snow-fall"></span></h3>
   <h3><span id="snow-depth"></span>cm</h3>
   <h3><span id="current-temp"></span>&deg;</h3>
+  <h3>The Time is <span id="time"></span><span id="am-pm"></span></h3>
 </div>
 <script type="application/javascript">
 
@@ -55,6 +56,16 @@ xhr.onreadystatechange = function() {
 };
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
+
+function setTime() {
+  var date = new Date();
+  var hour = date.getHours();
+  var minutes = date.getMinutes();
+  document.getElementById('time').innerHTML = hour + ':' + minutes;
+  document.getElementById('am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
+}
+setTime();
+setInterval(setTime,1000);
 </script>
 
 </body>
