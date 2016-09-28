@@ -3,23 +3,54 @@
   <title>Skiresorts</title>
 </head>
 <body>
+
+<div>
+  <h3>Last Snowfall: <span id="last-snow-fall"></span></h3>
+  <h3><span id="snow-depth"></span>cm</h3>
+  <h3><span id="current-temp"></span>&deg;</h3>
+</div>
 <script type="application/javascript">
 
+var account = '20FwFoqXiF';
+var forcast = 'f57663e4-ccb0-4b1f-bbe5-828c61ba541e';
+var snowreport = '0e6d046c-00c6-41ae-b22b-9d6d65f6fb47';
+var query = window.location.search.replace('?','').split('&');
+for(var i=0; i<query.length; i++) {
+  var params = query[i].split('=');
+  switch(params[0]) {
+    case 'account': account = params[1];
+      break;
+    case 'forcast': forcast = params[1];
+      break;
+    case 'snowreport':
+    case 'snow-report': snowreport = params[1];
+      break;
+  }
+}
+// FORCAST
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
+xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+forcast+'&output=json&'+(new Date()).getTime());
 xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    console.log(JSON.parse(this.response));
+    var result = JSON.parse(this.response);
+    if(result.weather && result.weather.current_weather) {
+      document.getElementById('current-temp').innerHTML = result.weather.current_weather[0].temp;
+    }
   }
 };
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
+// SNOWREPORT
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=0e6d046c-00c6-41ae-b22b-9d6d65f6fb47&output=json&'+(new Date()).getTime());
+xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+snowreport+'&output=json&'+(new Date()).getTime());
 xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    console.log(JSON.parse(this.response));
+    var result = JSON.parse(this.response);
+    if(result.weather && result.weather.snow_report) {
+      document.getElementById('last-snow-fall').innerHTML = result.weather.snow_report[0].last_snow_date;
+      document.getElementById('snow-depth').innerHTML = result.weather.snow_report[0].upper_snow_depth;
+    }
   }
 };
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
