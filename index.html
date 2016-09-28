@@ -12,7 +12,7 @@ xhr.onreadystatechange = function() {
     console.log(JSON.parse(this.response));
   }
 };
-xhr.setRequestHeader('Access-Control-Request-Method','GET');
+xhr.setRequestHeader('Access-Control-Request-Methods','GET');
 xhr.setRequestHeader('Access-Control-Request-Headers','X-Custom');
 xhr.send();
 
