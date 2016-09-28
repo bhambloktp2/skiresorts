@@ -12,8 +12,7 @@ xhr.onreadystatechange = function() {
     console.log(JSON.parse(this.response));
   }
 };
-xhr.setRequestHeader('Access-Control-Request-Methods','GET');
-xhr.setRequestHeader('Access-Control-Request-Headers','Access-Control-Request-Methods, X-Custom');
+xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
 console.log('yo22');
