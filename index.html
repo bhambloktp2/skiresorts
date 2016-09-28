@@ -5,94 +5,23 @@
 <body>
 <script type="application/javascript">
 
-function jsonp(url, callback) {
-    var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
-    window[callbackName] = function(data) {
-        delete window[callbackName];
-        document.body.removeChild(script);
-        callback(data);
-    };
-
-    var script = document.createElement('script');
-    script.onerror = function(err) {
-      console.log(err);
-    }
-    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
-    document.body.appendChild(script);
-}
-
-jsonp('https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime(), function(data) {
-   console.log(data);
-});
-
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
-xhr.send();
-
-
-var APP_ID = 'bd9d6bce';
-var APP_KEY = '48d079c8931bfcd142bdfabfb2a2d949';
-
-var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     console.log(this);
   }
 };
-xhr.open('GET','https://crossorigin.me/http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
-//http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949
 xhr.send();
 
 
-
-
-function createCORSRequest(method, url) {
-  var xhr = new XMLHttpRequest();
-  if ("withCredentials" in xhr) {
-
-    // Check if the XMLHttpRequest object has a "withCredentials" property.
-    // "withCredentials" only exists on XMLHTTPRequest2 objects.
-    xhr.open(method, url, true);
-
-  } else if (typeof XDomainRequest != "undefined") {
-
-    // Otherwise, check if XDomainRequest.
-    // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-    xhr = new XDomainRequest();
-    xhr.open(method, url);
-
-  } else {
-
-    // Otherwise, CORS is not supported by the browser.
-    xhr = null;
-
-  }
-  return xhr;
-}
-
-var xhr = createCORSRequest('GET', 'https://crossorigin.me/https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id="bd9d6bce"&app_key="48d079c8931bfcd142bdfabfb2a2d949"');
-if (!xhr) {
-  throw new Error('CORS not supported');
-}
-xhr.withCredentials = true;
-xhr.onload = function() {
- var responseText = xhr.responseText;
- console.log(responseText);
- // process the response.
-};
-
-xhr.onerror = function() {
-  console.log('There was an error!');
-};
-xhr.send();
-
-console.log('yo15');
+console.log('yo16');
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script>
-
+/*
     $.ajax({
         url: "https://crossorigin.me/https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949",
         type: "GET",
@@ -106,7 +35,7 @@ console.log('yo15');
             console.log(error);
         }
     });
-
+*/
 </script>
 </body>
 </html>
