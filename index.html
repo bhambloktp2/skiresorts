@@ -20,12 +20,12 @@ function jsonp(url, callback) {
     document.body.appendChild(script);
 }
 
-jsonp('https://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime(), function(data) {
+jsonp('http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime(), function(data) {
    console.log(data);
 });
 
 var xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
+xhr.open('POST', 'http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
 xhr.withCredentials = true;
 xhr.setRequestHeader('Content-Type', 'text/plain');
 xhr.send('bla');
@@ -40,6 +40,7 @@ xhr.onreadystatechange = function() {
     console.log(this);
   }
 };
+xhr.withCredentials = true;
 //http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949
 xhr.open('GET','https://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
 xhr.send();
