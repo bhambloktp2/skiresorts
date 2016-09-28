@@ -43,11 +43,11 @@ xhr.onreadystatechange = function() {
   }
 };
 xhr.withCredentials = true;
+xhr.open('GET','https://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
 xhr.setRequestHeader('Access-Control-Request-Method', 'GET');
 xhr.setRequestHeader('Access-Control-Request-Headers', 'Content-Type');
 xhr.setRequestHeader('Content-Type', 'application/json');
 //http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949
-xhr.open('GET','https://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
 xhr.send();
 
 console.log('yo3');
