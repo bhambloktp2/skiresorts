@@ -21,12 +21,12 @@ function jsonp(url, callback) {
     document.body.appendChild(script);
 }
 
-jsonp('http://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime(), function(data) {
+jsonp('https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime(), function(data) {
    console.log(data);
 });
 
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
+xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
 xhr.send();
 
 
@@ -39,7 +39,7 @@ xhr.onreadystatechange = function() {
     console.log(this);
   }
 };
-xhr.open('GET','http://crossorigin.me/https://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
+xhr.open('GET','https://crossorigin.me/https://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
 //http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949
 xhr.send();
 
@@ -86,7 +86,7 @@ xhr.onerror = function() {
 };
 xhr.send();
 
-console.log('yo12');
+console.log('yo13');
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -94,7 +94,7 @@ console.log('yo12');
 <script>
 
     $.ajax({
-        url: "http://crossorigin.me/https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949",
+        url: "https://crossorigin.me/https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949",
         type: "GET",
         success: function (parsedResponse, statusText, jqXhr) {
 
