@@ -39,7 +39,7 @@ xhr.onreadystatechange = function() {
     console.log(this);
   }
 };
-xhr.open('GET','https://crossorigin.me/https://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
+xhr.open('GET','https://crossorigin.me/http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
 //http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949
 xhr.send();
 
@@ -70,7 +70,7 @@ function createCORSRequest(method, url) {
   return xhr;
 }
 
-var xhr = createCORSRequest('PUT', 'http://crossorigin.me/https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id="bd9d6bce"&app_key="48d079c8931bfcd142bdfabfb2a2d949"');
+var xhr = createCORSRequest('PUT', 'https://crossorigin.me/https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id="bd9d6bce"&app_key="48d079c8931bfcd142bdfabfb2a2d949"');
 if (!xhr) {
   throw new Error('CORS not supported');
 }
@@ -86,7 +86,7 @@ xhr.onerror = function() {
 };
 xhr.send();
 
-console.log('yo13');
+console.log('yo14');
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
