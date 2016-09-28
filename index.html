@@ -15,7 +15,15 @@ xhr.onreadystatechange = function() {
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
-console.log('yo22');
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=0e6d046c-00c6-41ae-b22b-9d6d65f6fb47&output=json&'+(new Date()).getTime());
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    console.log(JSON.parse(this.response));
+  }
+};
+xhr.setRequestHeader('Access-Control-Request-Method','GET');
+xhr.send();
 </script>
 
 </body>
