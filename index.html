@@ -27,7 +27,9 @@ jsonp('http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f576
 var xhr = new XMLHttpRequest();
 xhr.open('POST', 'http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
 xhr.withCredentials = true;
-xhr.setRequestHeader('Content-Type', 'text/plain');
+xhr.setRequestHeader('Access-Control-Request-Method', 'GET');
+xhr.setRequestHeader('Access-Control-Request-Headers', 'Content-Type');
+xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.send('bla');
 
 
@@ -41,11 +43,14 @@ xhr.onreadystatechange = function() {
   }
 };
 xhr.withCredentials = true;
+xhr.setRequestHeader('Access-Control-Request-Method', 'GET');
+xhr.setRequestHeader('Access-Control-Request-Headers', 'Content-Type');
+xhr.setRequestHeader('Content-Type', 'application/json');
 //http://api.weatherunlocked.com/api/current/51.50,-0.12?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949
 xhr.open('GET','https://api.weatherunlocked.com/api/current/51.50,-0.12?app_id='+APP_ID+'&app_key='+APP_KEY);
 xhr.send();
 
-console.log('yo2');
+console.log('yo3');
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
