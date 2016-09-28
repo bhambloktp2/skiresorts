@@ -13,9 +13,10 @@ xhr.onreadystatechange = function() {
   }
 };
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
+xhr.setRequestHeader('Access-Control-Request-Headers','X-Custom');
 xhr.send();
 
-console.log('yo20');
+console.log('yo21');
 </script>
 
 </body>
