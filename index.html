@@ -12,30 +12,12 @@ xhr.onreadystatechange = function() {
     console.log(this);
   }
 };
+xhr.setRequestHeader('Access-Control-Request-Method':'GET');
 xhr.send();
 
 
-console.log('yo16');
+console.log('yo17');
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-<script>
-/*
-    $.ajax({
-        url: "https://crossorigin.me/https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949",
-        type: "GET",
-        success: function (parsedResponse, statusText, jqXhr) {
-
-            console.log(parsedResponse);
-
-        },
-        error: function (error) {
-
-            console.log(error);
-        }
-    });
-*/
-</script>
 </body>
 </html>
