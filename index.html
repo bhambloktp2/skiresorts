@@ -9,14 +9,14 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac=20FwFoqXiF&uref=f57663e4-ccb0-4b1f-bbe5-828c61ba541e&output=json&'+(new Date()).getTime());
 xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    console.log(this);
+    console.log(JSON.parse(this.response));
   }
 };
-xhr.setRequestHeader('Access-Control-Request-Method','GET');
+//xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
 
-console.log('yo18');
+console.log('yo19');
 </script>
 
 </body>
