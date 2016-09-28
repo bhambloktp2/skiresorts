@@ -74,7 +74,7 @@ function createCORSRequest(method, url) {
   return xhr;
 }
 
-var xhr = createCORSRequest('PUT', 'https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id=bd9d6bce&app_key=48d079c8931bfcd142bdfabfb2a2d949');
+var xhr = createCORSRequest('PUT', 'https://api.weatherunlocked.com/api/current/51.5,-0.1?app_id="bd9d6bce"&app_key="48d079c8931bfcd142bdfabfb2a2d949"');
 if (!xhr) {
   throw new Error('CORS not supported');
 }
@@ -90,7 +90,7 @@ xhr.onerror = function() {
 };
 xhr.send();
 
-console.log('yo10');
+console.log('yo11');
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
