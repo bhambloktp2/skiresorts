@@ -10,7 +10,7 @@ The following options are available:
   - color = rgb-value
   - resort = [tp2alphedhuez]
 
-Example: https://bhambloktp2.github.io/skiresorts/?show=time&color=cccccc&resort=tp2alphedhuez
+Example: https://bhambloktp2.github.io/skiresorts/?show=last-snowfall&color=cccccc&resort=tp2alphedhuez
 
 
 GENERAL PW: th1spl4ys2
