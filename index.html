@@ -1,30 +1,109 @@
 <html>
 <head>
-  <title>Skiresorts</title>
+<title>Skiresorts</title>
+<style>
+<!--
+body {
+  font: normal 24px sans-serif;
+}
+.hide { display: none; }
+.big {
+  font-size: 60px;
+}
+.medium {
+  font-size: 40px;
+}
+.small {
+  font-size: 20px;
+}
+.am-pm {
+  text-transform: uppercase;
+}
+.bold {
+  font-weight: bold;
+}
+-->
+</style>
 </head>
 <body>
 
-<div>
-  <h3>Last Snowfall: <span id="last-snow-fall"></span></h3>
-  <h3><span id="snow-depth"></span>cm</h3>
-  <h3><span id="current-temp"></span>&deg;</h3>
-  <h3>The Time is <span id="time"></span><span id="am-pm"></span></h3>
-</div>
+<div id="last-snowfall" class="hide"><span class="medium bold">Last<br />Snowfall:<br /></span><span class="medium content"></span></div>
+<div id="snow-depth" class="hide"><span class="content big bold"></span><span class="medium bold">cm</span></div>
+<div id="current-temp" class="hide"><span class="content big bold"></span>&deg;</div>
+<div id="time" class="hide"><span class="small">The Time is<br /></span><span class="content big bold"></span><span class="small bold am-pm"></span></div>
+
 <script type="application/javascript">
 
-var account = '20FwFoqXiF';
-var forcast = 'f57663e4-ccb0-4b1f-bbe5-828c61ba541e';
-var snowreport = '0e6d046c-00c6-41ae-b22b-9d6d65f6fb47';
+var resorts = [{
+  resort: 'tp2alphedhuez',
+  account: 'UkRYIY5Whp',
+  forcast: '770a7248-1695-4096-9e5a-40d62483a3e5',
+  snowreport: '792ffcd1-028b-4adc-a764-c7c2c20b0fde'
+}, {
+  resort: 'tp2breckenridge',
+  account: 'THJcklriyN',
+  forcast: '7c11a76b-01b0-4ed4-9e90-255cdc9426d7',
+  snowreport: '8d65de05-cfca-4307-9dec-5f548e03de7a'
+}, {
+  resort: 'tp2courmayeur',
+  account: 'Df7wkAweLQ',
+  forcast: 'db53a30b-1844-4162-b8e0-f0a6e1514f72',
+  snowreport: '25b98756-d0e9-4203-8e6c-df6089c2ee0e'
+}, {
+  resort: 'tp2hintertux',
+  account: '8jc5Eu3e4C',
+  forcast: '5826d53e-cc3b-4b9d-a8a0-934a4c1769e4',
+  snowreport: '1b627726-d3b0-473e-a029-28018eb5028d'
+}, {
+  resort: 'tp2morzine',
+  account: 'RgH5Ks6jCr',
+  forcast: 'cb5be529-d545-45da-916b-28a3e8961a0a',
+  snowreport: '04708dfc-2198-4f26-90a8-28f61079864d'
+}, {
+  resort: 'tp2obergurgl',
+  account: 'X8I3hz-NC2',
+  forcast: 'e1876bcf-82da-4d18-84d3-a6f8a3ff5ce7',
+  snowreport: 'c327ac4d-ba15-40eb-8416-5d7bb1496090'
+}, {
+  resort: 'tp2whistler',
+  account: 'COoQ/73XZB',
+  forcast: 'f2f44032-03b8-439e-9c7f-4c8f50b1a2d3',
+  snowreport: 'a32ad6bb-fedf-4bc4-9d6d-21c9d8e982b4'
+}, {
+  resort: 'tp2zermatt',
+  account: 'tOLINlR3sY',
+  forcast: 'df6af3e5-4e42-4f3d-897d-4c1350fa650b',
+  snowreport: '1e349962-68c3-4383-a3f3-57616db0b7f1'
+}];
+
+var account = resorts[0].account;
+var forcast = resorts[0].forcast;
+var snowreport = resorts[0].snowreport;
+var show = 'last-snowfall'
 var query = window.location.search.replace('?','').split('&');
 for(var i=0; i<query.length; i++) {
   var params = query[i].split('=');
   switch(params[0]) {
-    case 'account': account = params[1];
+    case 'show':
+      var el = document.getElementById(params[1]);
+      if(el) {
+        el.className = el.className.replace('hide','');
+      } else {
+        alert('Please provide one of the following values to the end of the url: &show=last-snowfall,  &show=snow-depth,  &show=current-temp,  &show=time')
+      }
       break;
-    case 'forcast': forcast = params[1];
+    case 'color':
+      var body = document.querySelector('body');
+      body.style.color = '#'+params[1];
       break;
-    case 'snowreport':
-    case 'snow-report': snowreport = params[1];
+    case 'resort': var resort = params[1];
+      for(var i=0; i<resorts.length; i++) {
+        if(resorts[i].resort === resort) {
+          account = resorts[i].account;
+          forcast = resorts[i].forcast;
+          snowreport = resorts[i].snowreport;
+        }
+      }
       break;
   }
 }
@@ -35,22 +114,22 @@ xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var result = JSON.parse(this.response);
     if(result.weather && result.weather.current_weather) {
-      document.getElementById('current-temp').innerHTML = result.weather.current_weather[0].temp;
+      document.querySelector('#current-temp .content').innerHTML = result.weather.current_weather[0].temp;
     }
   }
 };
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
-// SNOWREPORT
+// snowreport
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+snowreport+'&output=json&'+(new Date()).getTime());
 xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var result = JSON.parse(this.response);
     if(result.weather && result.weather.snow_report) {
-      document.getElementById('last-snow-fall').innerHTML = result.weather.snow_report[0].last_snow_date;
-      document.getElementById('snow-depth').innerHTML = result.weather.snow_report[0].upper_snow_depth;
+      document.querySelector('#last-snowfall .content').innerHTML = result.weather.snow_report[0].last_snow_date;
+      document.querySelector('#snow-depth .content').innerHTML = result.weather.snow_report[0].upper_snow_depth;
     }
   }
 };
@@ -61,8 +140,8 @@ function setTime() {
   var date = new Date();
   var hour = date.getHours();
   var minutes = date.getMinutes();
-  document.getElementById('time').innerHTML = hour + ':' + minutes;
-  document.getElementById('am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
+  document.querySelector('#time .content').innerHTML = hour + ':' + minutes;
+  document.querySelector('#time .am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
 }
 setTime();
 setInterval(setTime,1000);
