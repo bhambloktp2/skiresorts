@@ -21,6 +21,9 @@ body {
 .big {
   font-size: 60px;
 }
+.medium {
+  font-size: 40px;
+}
 .small {
   font-size: 26px;
 }
@@ -43,7 +46,7 @@ body {
 -->
 </style>
 </head>
-<body>
+<body class="color">
 
 <div id="last-snowfall" class="hide">
   <span class="small bold">LAST<br />SNOWFALL:<br /></span>
@@ -78,7 +81,7 @@ body {
 </div>
 
 <div id="current-temp" class="hide">
-  <svg version="1.1" id="temp-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  <svg version="1.1" id="current-temp-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   	 viewBox="0 0 99.6 229.1" style="enable-background:new 0 0 99.6 229.1;" xml:space="preserve">
   <g>
   	<path d="M75.2,136.4V27c0-14.9-12.1-27-27-27s-27,12.1-27,27v111.5C7.9,147.8,0,162.9,0,179.3c0,27.5,22.3,49.8,49.8,49.8
@@ -98,7 +101,30 @@ body {
   </svg>
   <span class="content big light"></span>
 </div>
-
+<div id="temp" class="hide">
+  <span class="date medium oblique color"></span><br /><br />
+  <span class="big color2">GOOD MORNING</span><br />
+  <span class="name big color2"></span><span class="big color2">...</span><br /><br />
+  <svg version="1.1" id="temp-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  	 viewBox="0 0 99.6 229.1" style="enable-background:new 0 0 99.6 229.1;" xml:space="preserve">
+  <g>
+  	<path d="M75.2,136.4V27c0-14.9-12.1-27-27-27s-27,12.1-27,27v111.5C7.9,147.8,0,162.9,0,179.3c0,27.5,22.3,49.8,49.8,49.8
+  		c27.5,0,49.8-22.3,49.8-49.8C99.6,161.6,90.3,145.4,75.2,136.4z M49.8,221.1c-23,0-41.8-18.7-41.8-41.8c0-14.3,7.2-27.5,19.3-35.2
+  		c1-0.6,1.7-1.7,1.9-2.9c0,0,0-0.1,0-0.1c0-0.1,0-0.1,0-0.2c0-0.1,0-0.1,0-0.2c0,0,0,0,0,0V27C29.3,16.5,37.8,8,48.2,8
+  		S67.1,16.5,67.1,27v111.8c0,0.3,0,0.5,0.1,0.8c0,0,0,0,0,0c0,0.1,0,0.1,0,0.2c0.1,0.3,0.2,0.6,0.3,0.8c0,0,0,0.1,0,0.1
+  		c0,0.1,0.1,0.1,0.1,0.2c0,0.1,0.1,0.1,0.1,0.2c0,0,0,0.1,0.1,0.1c0.2,0.3,0.5,0.7,0.9,0.9c0,0,0.1,0.1,0.1,0.1c0,0,0.1,0.1,0.1,0.1
+  		c0.1,0,0.1,0.1,0.2,0.1c0,0,0,0,0,0c13.8,7.3,22.3,21.4,22.3,37C91.6,202.3,72.8,221.1,49.8,221.1z"/>
+  	<path d="M46.4,34.7H25.3c-1.7,0-3-1.4-3-3c0-1.7,1.4-3,3-3h21.1c1.7,0,3,1.4,3,3C49.4,33.3,48,34.7,46.4,34.7z"/>
+  	<path d="M47,47.7H25.9c-1.7,0-3-1.4-3-3c0-1.7,1.4-3,3-3H47c1.7,0,3,1.4,3,3C50.1,46.4,48.7,47.7,47,47.7z"/>
+  	<path d="M47,60.1H25.9c-1.7,0-3-1.4-3-3c0-1.7,1.4-3,3-3H47c1.7,0,3,1.4,3,3C50.1,58.8,48.7,60.1,47,60.1z"/>
+  	<path d="M47,71.5H25.9c-1.7,0-3-1.4-3-3s1.4-3,3-3H47c1.7,0,3,1.4,3,3S48.7,71.5,47,71.5z"/>
+  	<path d="M47,82.7H25.9c-1.7,0-3-1.4-3-3s1.4-3,3-3H47c1.7,0,3,1.4,3,3S48.7,82.7,47,82.7z"/>
+  	<path d="M59.1,155.3v-47.8c0-5.5-4.5-10-10-10s-10,4.5-10,10v47.7c-10.9,4-18.8,14.5-18.8,26.8c0,15.8,12.8,28.6,28.6,28.6
+  		c15.8,0,28.6-12.8,28.6-28.6C77.5,169.7,69.8,159.4,59.1,155.3z"/>
+  </g>
+  </svg>
+  <span class="content color big light"></span>
+</div>
 <div id="location" class="hide">
   <div class="left">
     <svg version="1.1" id="location-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -118,69 +144,86 @@ body {
 <script type="application/javascript">
 
 var resorts = [{
+  resort: 'tp2chertsey',
+  name: 'CHERTSEY',
+  country: 'UK',
+  coordinates: '46°01’’N 7°45’’E',
+  account: 'NPego8Cja0',
+  forcast: '82f489f4-9fa9-4dcb-8185-57afe1906f3f',
+  snowreport: '1e349962-68c3-4383-a3f3-57616db0b7f1',
+  GMT: +1
+},{
   resort: 'tp2alphedhuez',
   name: 'ALPE D\' HUEZ',
   country: 'FRANCE',
   coordinates: '45°03’37’’N 6°04’17’’E',
   account: 'UkRYIY5Whp',
-  forcast: '770a7248-1695-4096-9e5a-40d62483a3e5',
-  snowreport: '792ffcd1-028b-4adc-a764-c7c2c20b0fde'
+  forcast: '2991d3de-12c0-438d-921a-b3dbecd3c949',
+  snowreport: '792ffcd1-028b-4adc-a764-c7c2c20b0fde',
+  GMT: +2
 }, {
   resort: 'tp2breckenridge',
   name: 'BRECKENRIDGE',
   country: 'USA',
   coordinates: '39°29’59’’N 106°02’36’’W',
   account: 'THJcklriyN',
-  forcast: '7c11a76b-01b0-4ed4-9e90-255cdc9426d7',
-  snowreport: '8d65de05-cfca-4307-9dec-5f548e03de7a'
+  forcast: '7b136fa9-d868-492e-a284-aecb17fd6eef',
+  snowreport: '8d65de05-cfca-4307-9dec-5f548e03de7a',
+  GMT: -6
 }, {
   resort: 'tp2courmayeur',
   name: 'COURMAYEUR',
   country: 'ITALY',
   coordinates: '45°47’’N 06°58’’E',
   account: 'Df7wkAweLQ',
-  forcast: 'db53a30b-1844-4162-b8e0-f0a6e1514f72',
-  snowreport: '25b98756-d0e9-4203-8e6c-df6089c2ee0e'
+  forcast: '8efb0146-e8eb-464f-a328-3b7f4a79dedb',
+  snowreport: '25b98756-d0e9-4203-8e6c-df6089c2ee0e',
+  GMT: +2
 }, {
   resort: 'tp2hintertux',
   name: 'HINTERTUX',
   country: 'AUSTRIA',
   coordinates: '47°3’55’’N 11°40’45’’E',
   account: '8jc5Eu3e4C',
-  forcast: '5826d53e-cc3b-4b9d-a8a0-934a4c1769e4',
-  snowreport: '1b627726-d3b0-473e-a029-28018eb5028d'
+  forcast: '11d09aee-3ac1-4161-ac0c-13595e757f30',
+  snowreport: '1b627726-d3b0-473e-a029-28018eb5028d',
+  GMT: +2
 }, {
   resort: 'tp2morzine',
   name: 'MORZINE',
   country: 'FRANCE',
   coordinates: '46°11’27’’N 6°46’30’’E',
   account: 'RgH5Ks6jCr',
-  forcast: 'cb5be529-d545-45da-916b-28a3e8961a0a',
-  snowreport: '04708dfc-2198-4f26-90a8-28f61079864d'
+  forcast: '08cb197d-4a71-49e2-895b-ac876c3d245b',
+  snowreport: '04708dfc-2198-4f26-90a8-28f61079864d',
+  GMT: +2
 }, {
   resort: 'tp2obergurgl',
   name: 'OBERGURGL',
   country: 'AUSTRIA',
   coordinates: '46°52’’N 11°01’’E',
   account: 'X8I3hz-NC2',
-  forcast: 'e1876bcf-82da-4d18-84d3-a6f8a3ff5ce7',
-  snowreport: 'c327ac4d-ba15-40eb-8416-5d7bb1496090'
+  forcast: '9535dd41-27f4-4f96-8d60-538336cef56a',
+  snowreport: 'c327ac4d-ba15-40eb-8416-5d7bb1496090',
+  GMT: +2
 }, {
   resort: 'tp2whistler',
   name: 'WHISTLER',
   country: 'CANADA',
   coordinates: '50°7’15’’N 122°57’16’’W',
   account: 'COoQ/73XZB',
-  forcast: 'f2f44032-03b8-439e-9c7f-4c8f50b1a2d3',
-  snowreport: 'a32ad6bb-fedf-4bc4-9d6d-21c9d8e982b4'
+  forcast: '1d1eaef5-5e87-4f22-a724-0930c4a910a8',
+  snowreport: 'a32ad6bb-fedf-4bc4-9d6d-21c9d8e982b4',
+  GMT: -7
 }, {
   resort: 'tp2zermatt',
   name: 'ZERMATT',
   country: 'SWITZERLAND',
   coordinates: '46°01’’N 7°45’’E',
   account: 'tOLINlR3sY',
-  forcast: 'df6af3e5-4e42-4f3d-897d-4c1350fa650b',
-  snowreport: '1e349962-68c3-4383-a3f3-57616db0b7f1'
+  forcast: '36fc3f68-4240-4847-9915-0119a891cf40',
+  snowreport: '1e349962-68c3-4383-a3f3-57616db0b7f1',
+  GMT: +2
 }];
 
 var account = resorts[0].account;
@@ -189,8 +232,31 @@ var snowreport = resorts[0].snowreport;
 var name = resorts[0].name;
 var country = resorts[0].country;
 var coordinates = resorts[0].coordinates;
-var show = 'last-snowfall'
+var GMT = 2;
+var show = 'last-snowfall';
+var defaultColor = 'b6092a';
 var query = window.location.search.replace('?','').split('&');
+
+setColor = function(color) {
+  var colorItems = document.querySelectorAll('.color');
+  for(var i=0; i<colorItems.length; i++) {
+    colorItems[i].style.color = '#'+(color || defaultColor);
+  }
+  document.querySelector('#snow-icon').style.fill = '#'+(color || defaultColor);
+  document.querySelector('#current-temp-icon').style.fill = '#'+(color || defaultColor);
+  document.querySelector('#temp-icon').style.fill = '#'+(color || defaultColor);
+  document.querySelector('#location-icon').style.fill = '#'+(color || defaultColor);
+}
+setColor();
+
+setColor2 = function(color) {
+  var colorItems = document.querySelectorAll('.color2');
+  for(var i=0; i<colorItems.length; i++) {
+    colorItems[i].style.color = '#'+(color || '111111');
+  }
+}
+setColor2();
+
 for(var i=0; i<query.length; i++) {
   var params = query[i].split('=');
   switch(params[0]) {
@@ -199,14 +265,14 @@ for(var i=0; i<query.length; i++) {
       if(el) {
         el.className = el.className.replace('hide','');
       } else {
-        alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=current-temp, &show=time, &show=location')
+        alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=temp, &show=current-temp, &show=time, &show=location')
       }
       break;
     case 'color':
-      document.querySelector('body').style.color = '#'+params[1];
-      document.querySelector('#snow-icon').style.fill = '#'+params[1];
-      document.querySelector('#temp-icon').style.fill = '#'+params[1];
-      document.querySelector('#location-icon').style.fill = '#'+params[1];
+      setColor(params[1]);
+      break;
+    case 'color2':
+      setColor2(params[1]);
       break;
     case 'resort': var resort = params[1];
       for(var i=0; i<resorts.length; i++) {
@@ -217,6 +283,7 @@ for(var i=0; i<query.length; i++) {
           name = resorts[i].name;
           country = resorts[i].country;
           coordinates = resorts[i].coordinates;
+          GMT = resorts[i].GMT;
         }
       }
       break;
@@ -229,9 +296,10 @@ xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var result = JSON.parse(this.response);
     if(result.weather && result.weather.current_weather) {
+      document.querySelector('#current-temp .content').innerHTML = result.weather.current_weather[0].temp+'&deg;';
       var string = 'High: '+result.weather.forecast[0].day_max_temp+'&deg;'+result.weather.forecast[0].temp_unit;
       string += ' / Low: '+result.weather.forecast[0].night_min_temp+'&deg;'+result.weather.forecast[0].temp_unit;
-      document.querySelector('#current-temp .content').innerHTML = string;//result.weather.current_weather[0].temp+'&deg;';
+      document.querySelector('#temp .content').innerHTML = string;
     }
   }
 };
@@ -256,8 +324,9 @@ xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
 function setTime() {
-  var date = new Date();
-  var hour = date.getHours();
+  var time = new Date();
+  var date = new Date(time.getTime() + (GMT*60*60*1000));
+  var hour = date.getUTCHours();
   var minutes = date.getMinutes();
   document.querySelector('#time .content').innerHTML = (hour < 10? '0' : '' ) + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
   document.querySelector('#time .am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
@@ -265,6 +334,12 @@ function setTime() {
 setTime();
 setInterval(setTime,1000);
 
+var date = new Date();
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var months = ['Januari', 'Februari', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+document.querySelector('#temp .date').innerHTML = days[date.getDay()]+(date.getDate()<10?' 0':' ')+date.getDate()+' '+months[date.getMonth()]+' '+date.getFullYear();
+document.querySelector('#temp .name').innerHTML = name;
 document.querySelector('#location .name').innerHTML = name;
 document.querySelector('#location .country').innerHTML = country;
 document.querySelector('#location .coordinates').innerHTML = coordinates;
