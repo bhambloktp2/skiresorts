@@ -14,11 +14,15 @@ body {
   height: 40px;
   margin-right: 10px;
 }
+#location-icon {
+  height: 76px;
+  margin-right: 10px;
+}
 .big {
   font-size: 60px;
 }
 .small {
-  font-size: 30px;
+  font-size: 26px;
 }
 .am-pm {
   text-transform: uppercase;
@@ -32,12 +36,26 @@ body {
 .light {
   font-family: "Avenir-Light";
 }
+#location .left,
+#location .right {
+  float: left;
+}
 -->
 </style>
 </head>
 <body>
 
-<div id="last-snowfall" class="hide"><span class="small bold">LAST<br />SNOWFALL:<br /></span><span class="small light content"></span></div>
+<div id="last-snowfall" class="hide">
+  <span class="small bold">LAST<br />SNOWFALL:<br /></span>
+  <span class="small light content"></span>
+</div>
+
+<div id="time" class="hide">
+  <span class="small oblique">The Time is:<br /></span>
+  <span class="content big bold"></span>
+  <span class="small bold am-pm"></span>
+</div>
+
 <div id="snow-depth" class="hide">
   <svg version="1.1" id="snow-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   	 viewBox="0 0 223.8 221" style="enable-background:new 0 0 223.8 221;" xml:space="preserve">
@@ -58,6 +76,7 @@ body {
   </svg>
   <span class="content big bold"></span><span class="small bold">CM</span>
 </div>
+
 <div id="current-temp" class="hide">
   <svg version="1.1" id="temp-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   	 viewBox="0 0 99.6 229.1" style="enable-background:new 0 0 99.6 229.1;" xml:space="preserve">
@@ -77,49 +96,88 @@ body {
   		c15.8,0,28.6-12.8,28.6-28.6C77.5,169.7,69.8,159.4,59.1,155.3z"/>
   </g>
   </svg>
-  <span class="content big bold"></span>
+  <span class="content big light"></span>
 </div>
-<div id="time" class="hide"><span class="small oblique">The Time is:<br /></span><span class="content big bold"></span><span class="small bold am-pm"></span></div>
+
+<div id="location" class="hide">
+  <div class="left">
+    <svg version="1.1" id="location-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    	 viewBox="0 0 200 300" style="enable-background:new 0 0 200 300;" xml:space="preserve">
+      <path class="st0" d="M189.7,53c-26-48-66-53-87-53S38.2,2.3,13.3,51c-26,51-7.6,76.5,3.4,100c12.2,26.1,86,149,86,149l82-145
+      	C184.7,155,215.7,101,189.7,53z M101.3,170c-37.6,0-68-30.4-68-68s30.4-68,68-68s68,30.4,68,68S138.8,170,101.3,170z"/>
+      <circle class="st0" cx="101.3" cy="102" r="50.7"/>
+    </svg>
+  </div>
+  <div class="right">
+    <span class="name big bold"></span><br />
+    <span class="country small bold"></span><br /><br />
+    <span class="coordinates mall light"></span>
+  </div>
+</div>
 
 <script type="application/javascript">
 
 var resorts = [{
   resort: 'tp2alphedhuez',
+  name: 'ALPE D\' HUEZ',
+  country: 'FRANCE',
+  coordinates: '45°03’37’’N 6°04’17’’E',
   account: 'UkRYIY5Whp',
   forcast: '770a7248-1695-4096-9e5a-40d62483a3e5',
   snowreport: '792ffcd1-028b-4adc-a764-c7c2c20b0fde'
 }, {
   resort: 'tp2breckenridge',
+  name: 'BRECKENRIDGE',
+  country: 'USA',
+  coordinates: '39°29’59’’N 106°02’36’’W',
   account: 'THJcklriyN',
   forcast: '7c11a76b-01b0-4ed4-9e90-255cdc9426d7',
   snowreport: '8d65de05-cfca-4307-9dec-5f548e03de7a'
 }, {
   resort: 'tp2courmayeur',
+  name: 'COURMAYEUR',
+  country: 'ITALY',
+  coordinates: '45°47’’N 06°58’’E',
   account: 'Df7wkAweLQ',
   forcast: 'db53a30b-1844-4162-b8e0-f0a6e1514f72',
   snowreport: '25b98756-d0e9-4203-8e6c-df6089c2ee0e'
 }, {
   resort: 'tp2hintertux',
+  name: 'HINTERTUX',
+  country: 'AUSTRIA',
+  coordinates: '47°3’55’’N 11°40’45’’E',
   account: '8jc5Eu3e4C',
   forcast: '5826d53e-cc3b-4b9d-a8a0-934a4c1769e4',
   snowreport: '1b627726-d3b0-473e-a029-28018eb5028d'
 }, {
   resort: 'tp2morzine',
+  name: 'MORZINE',
+  country: 'FRANCE',
+  coordinates: '46°11’27’’N 6°46’30’’E',
   account: 'RgH5Ks6jCr',
   forcast: 'cb5be529-d545-45da-916b-28a3e8961a0a',
   snowreport: '04708dfc-2198-4f26-90a8-28f61079864d'
 }, {
   resort: 'tp2obergurgl',
+  name: 'OBERGURGL',
+  country: 'AUSTRIA',
+  coordinates: '46°52’’N 11°01’’E',
   account: 'X8I3hz-NC2',
   forcast: 'e1876bcf-82da-4d18-84d3-a6f8a3ff5ce7',
   snowreport: 'c327ac4d-ba15-40eb-8416-5d7bb1496090'
 }, {
   resort: 'tp2whistler',
+  name: 'WHISTLER',
+  country: 'CANADA',
+  coordinates: '50°7’15’’N 122°57’16’’W',
   account: 'COoQ/73XZB',
   forcast: 'f2f44032-03b8-439e-9c7f-4c8f50b1a2d3',
   snowreport: 'a32ad6bb-fedf-4bc4-9d6d-21c9d8e982b4'
 }, {
   resort: 'tp2zermatt',
+  name: 'ZERMATT',
+  country: 'SWITZERLAND',
+  coordinates: '46°01’’N 7°45’’E',
   account: 'tOLINlR3sY',
   forcast: 'df6af3e5-4e42-4f3d-897d-4c1350fa650b',
   snowreport: '1e349962-68c3-4383-a3f3-57616db0b7f1'
@@ -128,6 +186,9 @@ var resorts = [{
 var account = resorts[0].account;
 var forcast = resorts[0].forcast;
 var snowreport = resorts[0].snowreport;
+var name = resorts[0].name;
+var country = resorts[0].country;
+var coordinates = resorts[0].coordinates;
 var show = 'last-snowfall'
 var query = window.location.search.replace('?','').split('&');
 for(var i=0; i<query.length; i++) {
@@ -138,16 +199,14 @@ for(var i=0; i<query.length; i++) {
       if(el) {
         el.className = el.className.replace('hide','');
       } else {
-        alert('Please provide one of the following values to the end of the url: &show=last-snowfall,  &show=snow-depth,  &show=current-temp,  &show=time')
+        alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=current-temp, &show=time, &show=location')
       }
       break;
     case 'color':
-      var body = document.querySelector('body');
-      body.style.color = '#'+params[1];
-      var icon = document.querySelector('#snow-icon');
-      icon.style.fill = '#'+params[1];
-      var temp = document.querySelector('#temp-icon');
-      temp.style.fill = '#'+params[1];
+      document.querySelector('body').style.color = '#'+params[1];
+      document.querySelector('#snow-icon').style.fill = '#'+params[1];
+      document.querySelector('#temp-icon').style.fill = '#'+params[1];
+      document.querySelector('#location-icon').style.fill = '#'+params[1];
       break;
     case 'resort': var resort = params[1];
       for(var i=0; i<resorts.length; i++) {
@@ -155,6 +214,9 @@ for(var i=0; i<query.length; i++) {
           account = resorts[i].account;
           forcast = resorts[i].forcast;
           snowreport = resorts[i].snowreport;
+          name = resorts[i].name;
+          country = resorts[i].country;
+          coordinates = resorts[i].coordinates;
         }
       }
       break;
@@ -167,7 +229,9 @@ xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var result = JSON.parse(this.response);
     if(result.weather && result.weather.current_weather) {
-      document.querySelector('#current-temp .content').innerHTML = result.weather.current_weather[0].temp+'&deg;';
+      var string = 'High: '+result.weather.forecast[0].day_max_temp+'&deg;'+result.weather.forecast[0].temp_unit;
+      string += ' / Low: '+result.weather.forecast[0].night_min_temp+'&deg;'+result.weather.forecast[0].temp_unit;
+      document.querySelector('#current-temp .content').innerHTML = string;//result.weather.current_weather[0].temp+'&deg;';
     }
   }
 };
@@ -195,11 +259,16 @@ function setTime() {
   var date = new Date();
   var hour = date.getHours();
   var minutes = date.getMinutes();
-  document.querySelector('#time .content').innerHTML = (hour < 9? '0' : '' ) + hour + ':' + (minutes < 9 ? '0' : '') + minutes;
+  document.querySelector('#time .content').innerHTML = (hour < 10? '0' : '' ) + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
   document.querySelector('#time .am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
 }
 setTime();
 setInterval(setTime,1000);
+
+document.querySelector('#location .name').innerHTML = name;
+document.querySelector('#location .country').innerHTML = country;
+document.querySelector('#location .coordinates').innerHTML = coordinates;
+
 </script>
 
 </body>
