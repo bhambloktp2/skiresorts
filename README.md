@@ -6,9 +6,10 @@ The following options are available:
 
   http://www.myweather2.com/
 
-  - show = [last-snowfall, snow-depth, current-temp, time]
-  - color = rgb-value
-  - resort = [tp2alphedhuez]
+  - show = [last-snowfall, snow-depth, temp, current-temp, time, location]
+  - color = rgb-value (eg: ff0000 = red)
+  - color2 = rgb-value (eg: cccccc = grey)
+  - resort = one of the usernames here below (eg: tp2alphedhuez)
 
 Example: https://bhambloktp2.github.io/skiresorts/?show=last-snowfall&color=cccccc&resort=tp2alphedhuez
 
@@ -20,7 +21,6 @@ GENERAL PW: th1spl4ys2
   - bob+tp2chertsey@bhamblok.be
   - account: NPego8Cja0
   - forcast: 82f489f4-9fa9-4dcb-8185-57afe1906f3f
-  - snow-report: 792ffcd1-028b-4adc-a764-c7c2c20b0fde
 
 ## Alpe D' Huez - France - 45°03’37’’N 6°04’17’’E / 45.0926, 6.0683
   - username: tp2alphedhuez
