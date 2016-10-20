@@ -111,7 +111,7 @@ body {
 </div>
 <div id="temp" class="hide">
   <span class="date medium oblique color"></span><br /><br />
-  <span class="big color2">GOOD MORNING</span><br />
+  <span class="greeting big color2">GOOD MORNING</span><br />
   <span class="name big color2"></span><span class="big color2">...</span><br /><br /><br />
   <svg version="1.1" id="temp-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   	 viewBox="0 0 99.6 229.1" style="enable-background:new 0 0 99.6 229.1;" xml:space="preserve">
@@ -331,6 +331,7 @@ xhr.onreadystatechange = function() {
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
+var greeting = document.querySelector('.greeting').innerHTML;
 function setTime() {
   var time = new Date();
   var date = new Date(time.getTime() + (GMT*60*60*1000));
@@ -338,6 +339,10 @@ function setTime() {
   var minutes = date.getMinutes();
   document.querySelector('#time .content').innerHTML = (hour < 10? '0' : '' ) + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
   document.querySelector('#time .am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
+  if ((hour > 11) && (greeting !== 'GOOD AFTERNOON')) {
+    greeting = 'GOOD AFTERNOON';
+    document.querySelector('.greeting').innerHTML = greeting;
+  }
 }
 setTime();
 setInterval(setTime,1000);
