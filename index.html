@@ -331,11 +331,21 @@ xhr.onreadystatechange = function() {
 xhr.setRequestHeader('Access-Control-Request-Method','GET');
 xhr.send();
 
+Date.prototype.getTimezone = function() {
+    var jan = new Date(this.getFullYear(), 0, 1);
+    var jul = new Date(this.getFullYear(), 6, 1);
+
+    var utcOffset = new Date().getTimezoneOffset() / 60 * -1;
+    var dstOffset = (jan.getTimezoneOffset() - jul.getTimezoneOffset()) / 60;
+
+    return (utcOffset + dstOffset);
+}
+
 var greeting = document.querySelector('.greeting').innerHTML;
 function setTime() {
   // var time = new Date();
   // var date = new Date(time.getTime() + (GMT*60*60*1000));
-  var date = new Date();
+  var date = new Date(Date.now() + ((-(new Date()).getTimezone()+GMT)*60*60*1000));
   var hour = date.getHours();
   var minutes = date.getMinutes();
   document.querySelector('#time .content').innerHTML = (hour < 10? '0' : '' ) + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
