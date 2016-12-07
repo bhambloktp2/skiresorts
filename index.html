@@ -297,9 +297,27 @@ for(var i=0; i<query.length; i++) {
       break;
   }
 }
+
+(function() {
+    var cors_api_host = 'cors-anywhere.herokuapp.com'; // https://crossorigin.me/
+    var cors_api_url = 'https://' + cors_api_host + '/';
+    var slice = [].slice;
+    var origin = window.location.protocol + '//' + window.location.host;
+    var open = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function() {
+        var args = slice.call(arguments);
+        var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+        if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
+            targetOrigin[1] !== cors_api_host) {
+            args[1] = cors_api_url + args[1];
+        }
+        return open.apply(this, args);
+    };
+})();
+
 // FORCAST
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+forcast+'&output=json&'+(new Date()).getTime());
+xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+forcast+'&output=json&'+(new Date()).getTime());
 xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var result = JSON.parse(this.response);
@@ -316,7 +334,7 @@ xhr.send();
 
 // snowreport
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://crossorigin.me/http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+snowreport+'&output=json&'+(new Date()).getTime());
+xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+snowreport+'&output=json&'+(new Date()).getTime());
 xhr.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     var result = JSON.parse(this.response);
