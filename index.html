@@ -266,6 +266,37 @@ setColor2 = function(color) {
 }
 setColor2();
 
+for(var i=0; i<query.length; i++) {
+  var params = query[i].split('=');
+  switch(params[0]) {
+    case 'show':
+      var el = document.getElementById(params[1]);
+      if(el) {
+        el.className = el.className.replace('hide','');
+      }
+      break;
+    case 'color':
+      setColor(params[1]);
+      break;
+    case 'color2':
+      setColor2(params[1]);
+      break;
+    case 'resort': var resort = params[1];
+      for(var i=0; i<resorts.length; i++) {
+        if(resorts[i].resort === resort) {
+          account = resorts[i].account;
+          forcast = resorts[i].forcast;
+          snowreport = resorts[i].snowreport;
+          name = resorts[i].name;
+          country = resorts[i].country;
+          coordinates = resorts[i].coordinates;
+          GMT = resorts[i].GMT;
+        }
+      }
+      break;
+  }
+}
+
 (function() {
     var cors_api_host = 'cors-anywhere.herokuapp.com'; // https://crossorigin.me/
     var cors_api_url = 'https://' + cors_api_host + '/';
@@ -373,38 +404,6 @@ document.querySelector('#temp .name').innerHTML = name;
 document.querySelector('#location .name').innerHTML = name;
 document.querySelector('#location .country').innerHTML = country;
 document.querySelector('#location .coordinates').innerHTML = coordinates;
-
-
-for(var i=0; i<query.length; i++) {
-  var params = query[i].split('=');
-  switch(params[0]) {
-    case 'show':
-      var el = document.getElementById(params[1]);
-      if(el) {
-        el.className = el.className.replace('hide','');
-      }
-      break;
-    case 'color':
-      setColor(params[1]);
-      break;
-    case 'color2':
-      setColor2(params[1]);
-      break;
-    case 'resort': var resort = params[1];
-      for(var i=0; i<resorts.length; i++) {
-        if(resorts[i].resort === resort) {
-          account = resorts[i].account;
-          forcast = resorts[i].forcast;
-          snowreport = resorts[i].snowreport;
-          name = resorts[i].name;
-          country = resorts[i].country;
-          coordinates = resorts[i].coordinates;
-          GMT = resorts[i].GMT;
-        }
-      }
-      break;
-  }
-}
 
 for(var i=0; i<query.length; i++) {
   var params = query[i].split('=');
