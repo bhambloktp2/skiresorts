@@ -244,6 +244,7 @@ var GMT = 2;
 var show = 'last-snowfall';
 var defaultColor = 'b6092a';
 var query = window.location.search.replace('?','').split('&');
+var fetchEveryXMinutes = 15;
 
 setColor = function(color) {
   var colorItems = document.querySelectorAll('.color');
@@ -265,41 +266,8 @@ setColor2 = function(color) {
 }
 setColor2();
 
-for(var i=0; i<query.length; i++) {
-  var params = query[i].split('=');
-  switch(params[0]) {
-    case 'show':
-      var el = document.getElementById(params[1]);
-      if(el) {
-        el.className = el.className.replace('hide','');
-      } else {
-        alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=temp, &show=current-temp, &show=time, &show=location')
-      }
-      break;
-    case 'color':
-      setColor(params[1]);
-      break;
-    case 'color2':
-      setColor2(params[1]);
-      break;
-    case 'resort': var resort = params[1];
-      for(var i=0; i<resorts.length; i++) {
-        if(resorts[i].resort === resort) {
-          account = resorts[i].account;
-          forcast = resorts[i].forcast;
-          snowreport = resorts[i].snowreport;
-          name = resorts[i].name;
-          country = resorts[i].country;
-          coordinates = resorts[i].coordinates;
-          GMT = resorts[i].GMT;
-        }
-      }
-      break;
-  }
-}
-
 (function() {
-    var cors_api_host = 'crossorigin.me'; //'cors-anywhere.herokuapp.com'; // https://crossorigin.me/
+    var cors_api_host = 'cors-anywhere.herokuapp.com'; // https://crossorigin.me/
     var cors_api_url = 'https://' + cors_api_host + '/';
     var slice = [].slice;
     var origin = window.location.protocol + '//' + window.location.host;
@@ -316,38 +284,58 @@ for(var i=0; i<query.length; i++) {
 })();
 
 // FORCAST
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+forcast+'&output=json&'+(new Date()).getTime());
-xhr.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var result = JSON.parse(this.response);
-    if(result.weather && result.weather.current_weather) {
-      document.querySelector('#current-temp .content').innerHTML = result.weather.current_weather[0].temp+'&deg;';
-      var string = 'High: '+result.weather.forecast[0].day_max_temp+'&deg;'+result.weather.forecast[0].temp_unit;
-      string += ' / Low: '+result.weather.forecast[0].night_min_temp+'&deg;'+result.weather.forecast[0].temp_unit;
-      document.querySelector('#temp .content').innerHTML = string;
-    }
+function getForeCast() {
+  if(!localStorage.lastFetch || (localStorage.lastFetch < Date.now())) {
+    localStorage.lastFetch = Date.now() + fetchEveryXMinutes * 60 * 1000;
+    console.log('FETCHING NEW DATA');
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+forcast+'&output=json&'+(new Date()).getTime());
+    xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var result = JSON.parse(this.response);
+        if(result.weather && result.weather.current_weather) {
+          var string = 'High: '+result.weather.forecast[0].day_max_temp+'&deg;'+result.weather.forecast[0].temp_unit;
+          string += ' / Low: '+result.weather.forecast[0].night_min_temp+'&deg;'+result.weather.forecast[0].temp_unit;
+          document.querySelector('#current-temp .content').innerHTML = localStorage.currentTemp = result.weather.current_weather[0].temp+'&deg;';
+          document.querySelector('#temp .content').innerHTML = localStorage.temp = string;
+        }
+      }
+    };
+    xhr.setRequestHeader('Access-Control-Request-Method','GET');
+    xhr.send();
+  } else {
+    console.log('USING DATA FROM MAX '+fetchEveryXMinutes+' MINUTES AGO');
+    document.querySelector('#current-temp .content').innerHTML = localStorage.currentTemp;
+    document.querySelector('#temp .content').innerHTML = localStorage.temp;
   }
-};
-xhr.setRequestHeader('Access-Control-Request-Method','GET');
-xhr.send();
+}
 
 // snowreport
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+snowreport+'&output=json&'+(new Date()).getTime());
-xhr.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var result = JSON.parse(this.response);
-    if(result.weather && result.weather.snow_report) {
-      var dateString = result.weather.snow_report[0].last_snow_date + ' ' + (new Date().getUTCFullYear());
-      var date = new Date(dateString);
-      document.querySelector('#last-snowfall .content').innerHTML = date.toLocaleDateString();
-      document.querySelector('#snow-depth .content').innerHTML = result.weather.snow_report[0].upper_snow_depth;
-    }
+function getSnowReport() {
+  if(!localStorage.lastSnowReportFetch || (localStorage.lastSnowReportFetch < Date.now())) {
+    localStorage.lastSnowReportFetch = Date.now() + fetchEveryXMinutes * 60 * 1000;
+    console.log('FETCHING NEW DATA');
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+snowreport+'&output=json&'+(new Date()).getTime());
+    xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var result = JSON.parse(this.response);
+        if(result.weather && result.weather.snow_report) {
+          var dateString = result.weather.snow_report[0].last_snow_date + ' ' + (new Date().getUTCFullYear());
+          var date = new Date(dateString);
+          document.querySelector('#last-snowfall .content').innerHTML = localStorage.lastSnowfall = date.toLocaleDateString();
+          document.querySelector('#snow-depth .content').innerHTML = localStorage.snowDepth = result.weather.snow_report[0].upper_snow_depth;
+        }
+      }
+    };
+    xhr.setRequestHeader('Access-Control-Request-Method','GET');
+    xhr.send();
+  } else {
+    console.log('USING DATA FROM MAX '+fetchEveryXMinutes+' MINUTES AGO');
+    document.querySelector('#last-snowfall .content').innerHTML = localStorage.lastSnowfall;
+    document.querySelector('#snow-depth .content').innerHTML = localStorage.snowDepth;
   }
-};
-xhr.setRequestHeader('Access-Control-Request-Method','GET');
-xhr.send();
+}
 
 Date.prototype.getTimezone = function() {
     var jan = new Date(this.getFullYear(), 0, 1);
@@ -385,6 +373,53 @@ document.querySelector('#temp .name').innerHTML = name;
 document.querySelector('#location .name').innerHTML = name;
 document.querySelector('#location .country').innerHTML = country;
 document.querySelector('#location .coordinates').innerHTML = coordinates;
+
+
+for(var i=0; i<query.length; i++) {
+  var params = query[i].split('=');
+  switch(params[0]) {
+    case 'show':
+      var el = document.getElementById(params[1]);
+      if(el) {
+        el.className = el.className.replace('hide','');
+      }
+      switch(params[1]) {
+        case 'last-snowfall':
+        case 'snow-depth':
+          getSnowReport();
+          break;
+        case 'temp':
+        case 'current-temp':
+          getForeCast();
+          break;
+        case 'time':
+        case 'location':
+          console.log('no need to fetch data',params[1]);
+          break;
+        default: alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=temp, &show=current-temp, &show=time, &show=location');
+      }
+      break;
+    case 'color':
+      setColor(params[1]);
+      break;
+    case 'color2':
+      setColor2(params[1]);
+      break;
+    case 'resort': var resort = params[1];
+      for(var i=0; i<resorts.length; i++) {
+        if(resorts[i].resort === resort) {
+          account = resorts[i].account;
+          forcast = resorts[i].forcast;
+          snowreport = resorts[i].snowreport;
+          name = resorts[i].name;
+          country = resorts[i].country;
+          coordinates = resorts[i].coordinates;
+          GMT = resorts[i].GMT;
+        }
+      }
+      break;
+  }
+}
 
 </script>
 
