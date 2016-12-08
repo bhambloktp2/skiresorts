@@ -285,8 +285,8 @@ setColor2();
 
 // FORCAST
 function getForeCast() {
-  if(!localStorage.lastFetch || (localStorage.lastFetch < Date.now())) {
-    localStorage.lastFetch = Date.now() + fetchEveryXMinutes * 60 * 1000;
+  if(!localStorage[resort+'lastFetch'] || (localStorage[resort+'lastFetch'] < Date.now())) {
+    localStorage[resort+'lastFetch'] = Date.now() + fetchEveryXMinutes * 60 * 1000;
     console.log('FETCHING NEW DATA');
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+forcast+'&output=json&'+(new Date()).getTime());
@@ -296,8 +296,8 @@ function getForeCast() {
         if(result.weather && result.weather.current_weather) {
           var string = 'High: '+result.weather.forecast[0].day_max_temp+'&deg;'+result.weather.forecast[0].temp_unit;
           string += ' / Low: '+result.weather.forecast[0].night_min_temp+'&deg;'+result.weather.forecast[0].temp_unit;
-          document.querySelector('#current-temp .content').innerHTML = localStorage.currentTemp = result.weather.current_weather[0].temp+'&deg;';
-          document.querySelector('#temp .content').innerHTML = localStorage.temp = string;
+          document.querySelector('#current-temp .content').innerHTML = localStorage[resort+'currentTemp'] = result.weather.current_weather[0].temp+'&deg;';
+          document.querySelector('#temp .content').innerHTML = localStorage[resort+'temp'] = string;
         }
       }
     };
@@ -305,15 +305,15 @@ function getForeCast() {
     xhr.send();
   } else {
     console.log('USING DATA FROM MAX '+fetchEveryXMinutes+' MINUTES AGO');
-    document.querySelector('#current-temp .content').innerHTML = localStorage.currentTemp;
-    document.querySelector('#temp .content').innerHTML = localStorage.temp;
+    document.querySelector('#current-temp .content').innerHTML = localStorage[resort+'currentTemp'];
+    document.querySelector('#temp .content').innerHTML = localStorage[resort+'temp'];
   }
 }
 
 // snowreport
 function getSnowReport() {
-  if(!localStorage.lastSnowReportFetch || (localStorage.lastSnowReportFetch < Date.now())) {
-    localStorage.lastSnowReportFetch = Date.now() + fetchEveryXMinutes * 60 * 1000;
+  if(!localStorage[resort+'lastSnowReportFetch'] || (localStorage[resort+'lastSnowReportFetch'] < Date.now())) {
+    localStorage[resort+'lastSnowReportFetch'] = Date.now() + fetchEveryXMinutes * 60 * 1000;
     console.log('FETCHING NEW DATA');
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://www.myweather2.com/developer/weather.ashx?uac='+account+'&uref='+snowreport+'&output=json&'+(new Date()).getTime());
@@ -323,8 +323,8 @@ function getSnowReport() {
         if(result.weather && result.weather.snow_report) {
           var dateString = result.weather.snow_report[0].last_snow_date + ' ' + (new Date().getUTCFullYear());
           var date = new Date(dateString);
-          document.querySelector('#last-snowfall .content').innerHTML = localStorage.lastSnowfall = date.toLocaleDateString();
-          document.querySelector('#snow-depth .content').innerHTML = localStorage.snowDepth = result.weather.snow_report[0].upper_snow_depth;
+          document.querySelector('#last-snowfall .content').innerHTML = localStorage[resort+'lastSnowfall'] = date.toLocaleDateString();
+          document.querySelector('#snow-depth .content').innerHTML = localStorage[resort+'snowDepth'] = result.weather.snow_report[0].upper_snow_depth;
         }
       }
     };
@@ -332,8 +332,8 @@ function getSnowReport() {
     xhr.send();
   } else {
     console.log('USING DATA FROM MAX '+fetchEveryXMinutes+' MINUTES AGO');
-    document.querySelector('#last-snowfall .content').innerHTML = localStorage.lastSnowfall;
-    document.querySelector('#snow-depth .content').innerHTML = localStorage.snowDepth;
+    document.querySelector('#last-snowfall .content').innerHTML = localStorage[resort+'lastSnowfall'];
+    document.querySelector('#snow-depth .content').innerHTML = localStorage[resort+'snowDepth'];
   }
 }
 
@@ -383,21 +383,6 @@ for(var i=0; i<query.length; i++) {
       if(el) {
         el.className = el.className.replace('hide','');
       }
-      switch(params[1]) {
-        case 'last-snowfall':
-        case 'snow-depth':
-          getSnowReport();
-          break;
-        case 'temp':
-        case 'current-temp':
-          getForeCast();
-          break;
-        case 'time':
-        case 'location':
-          console.log('no need to fetch data',params[1]);
-          break;
-        default: alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=temp, &show=current-temp, &show=time, &show=location');
-      }
       break;
     case 'color':
       setColor(params[1]);
@@ -418,6 +403,27 @@ for(var i=0; i<query.length; i++) {
         }
       }
       break;
+  }
+}
+
+for(var i=0; i<query.length; i++) {
+  var params = query[i].split('=');
+  if (params[0] == 'show') {
+    switch(params[1]) {
+      case 'last-snowfall':
+      case 'snow-depth':
+        getSnowReport();
+        break;
+      case 'temp':
+      case 'current-temp':
+        getForeCast();
+        break;
+      case 'time':
+      case 'location':
+        console.log('no need to fetch data',params[1]);
+        break;
+      default: alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=temp, &show=current-temp, &show=time, &show=location');
+    }
   }
 }
 
