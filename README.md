@@ -6,7 +6,7 @@ The following options are available:
 
   http://www.myweather2.com/
 
-  - show = [last-snowfall, snow-depth, temp, current-temp, time, location]
+  - show = [last-snowfall, snow-depth, temp, current-temp, time, location, elevation, weather]
   - color = rgb-value (eg: ff0000 = red)
   - color2 = rgb-value (eg: cccccc = grey)
   - resort = one of the usernames here below (eg: tp2alphedhuez)
@@ -77,3 +77,39 @@ GENERAL PW: th1spl4ys2
   - account: tOLINlR3sY
   - forcast: 36fc3f68-4240-4847-9915-0119a891cf40
   - snow-report: 1e349962-68c3-4383-a3f3-57616db0b7f1
+
+## MachuPiccu - PERU - 13°09’48’’S / 72°32’44’’W / -13.1631412,-72.5471516
+  - username: tp2machupiccu
+  - bob+tp2machupiccu@bhamblok.be
+  - account: kea/lcJmpx
+  - forcast: f5fa39d8-0a39-4ef6-b28e-57d23022c290
+
+## CHAMONIX VALLEY - AUVERGNE-RHÔNE-ALPES - 45°55’23’’N / 6°52’11’’E / 45.9234,6.8015422  - elevation: 3,842 m
+  - username: tp2chamonixvalley
+  - bob+tp2chamonixvalley@bhamblok.be
+  - account: N-TTrFZ356
+  - forcast: c5691917-47c2-48ba-8513-9b5efdc5ddea
+
+## EVEREST BASE CAMP - KHUMJUNG 56000, NEPAL - 28°0’26”N / 86°51’34”E / 28.0025862,86.8505716  - elevation: 5,364 m
+  - username: tp2everest
+  - bob+tp2everest@bhamblok.be
+  - account: p8rSFb67a.
+  - forcast: 6577fdad-24ee-48e1-bcc0-7e45067a55cc
+
+## KILLIMANJARO - TANZANIA - 03°04’33’’S / 37°21’12’’E / -3.0674247,37.3534386  - elevation: 5,895 m
+  - username: tp2killimanjaro
+  - bob+tp2killimanjaro@bhamblok.be
+  - account: eOO6Bm6AlZ
+  - forcast: 7c9df3f3-66cc-4c26-8f94-7b94abaaffd2
+
+## TIGNES - TARENTAISE VALLEY, FRANCE - 45°28’06’’N / 6°54’20’’E / 45.4744004,6.9226552 - elevation: 3,747 m
+  - username: tp2tignes
+  - bob+tp2tignes@bhamblok.be
+  - account: UO5cVq2j6M
+  - forcast: 0d6c0f0b-4f21-4d55-b558-f1b01aab314a
+
+## CERVINIA - VALLE D’AOSTA, ITALY - 45°56’04’’N / 7°37’52’’E / 45.9337002,7.6270163 - elevation: 3,480 m
+  - username: tp2cervinia
+  - bob+tp2cervinia@bhamblok.be
+  - account: Lbg2TKgReP
+  - forcast: 0d67439b-ec53-4619-bad1-db57596949b4

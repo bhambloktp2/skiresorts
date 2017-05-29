@@ -29,6 +29,9 @@ body {
 .small {
   font-size: 26px;
 }
+.very-small {
+  font-size: 20px;
+}
 .am-pm {
   text-transform: uppercase;
 }
@@ -148,6 +151,20 @@ body {
     <span class="coordinates mall light"></span>
   </div>
 </div>
+<div id="weather" class="hide">
+    <span class="small bold">Wind</span><br />
+    <span class="small light wind"></span><br /><br />
+    <span class="small bold">Humidity</span><br />
+    <span class="small light humidity"></span><br /><br />
+    <span class="small bold">Pressure</span><br />
+    <span class="small light pressure"></span><br /><br />
+    <span class="small bold">Visibility</span><br />
+    <span class="small light visibility"></span>
+</div>
+<div id="elevation" class="hide">
+  <span class="name medium bold">Highest<br />Elevation:</span><br />
+  <span class="elevation medium"></span>
+</div>
 
 <script type="application/javascript">
 
@@ -195,7 +212,8 @@ var resorts = [{
   account: '8jc5Eu3e4C',
   forcast: '11d09aee-3ac1-4161-ac0c-13595e757f30',
   snowreport: '1b627726-d3b0-473e-a029-28018eb5028d',
-  GMT: +2
+  GMT: +2,
+  elevation: '3,250 m'
 }, {
   resort: 'tp2morzine',
   name: 'MORZINE',
@@ -232,6 +250,60 @@ var resorts = [{
   forcast: '36fc3f68-4240-4847-9915-0119a891cf40',
   snowreport: '1e349962-68c3-4383-a3f3-57616db0b7f1',
   GMT: +2
+}, {
+  resort: 'tp2machupiccu',
+  name: 'MACHU PICCU',
+  country: 'PERU',
+  elevation: '2,430 m',
+  coordinates: '13°09’48’’S 72°32’44’’W',
+  account: 'kea/lcJmpx',
+  forcast: 'f5fa39d8-0a39-4ef6-b28e-57d23022c290',
+  GMT: -5
+}, {
+  resort: 'tp2chamonixvalley',
+  name: 'CHAMONIX VALLEY',
+  country: 'AUVERGNE-RHÔNE-ALPES',
+  elevation: '3,842 m',
+  coordinates: '45°55’23’’N / 6°52’11’’E',
+  account: 'N-TTrFZ356',
+  forcast: 'c5691917-47c2-48ba-8513-9b5efdc5ddea',
+  GMT: -5
+}, {
+  resort: 'tp2everest',
+  name: 'EVEREST BASE CAMP',
+  country: 'KHUMJUNG 56000, NEPAL',
+  elevation: '5,364 m',
+  coordinates: '28°0’26”N / 86°51’34”E',
+  account: 'p8rSFb67a.',
+  forcast: '6577fdad-24ee-48e1-bcc0-7e45067a55cc',
+  GMT: -5
+}, {
+  resort: 'tp2killimanjaro',
+  name: 'KILLIMANJARO',
+  country: 'TANZANIA',
+  elevation: '5,895 m',
+  coordinates: '03°04’33’’S / 37°21’12’’E',
+  account: 'eOO6Bm6AlZ',
+  forcast: '7c9df3f3-66cc-4c26-8f94-7b94abaaffd2',
+  GMT: -5
+}, {
+  resort: 'tp2tignes',
+  name: 'TIGNES',
+  country: 'TARENTAISE VALLEY, FRANCE',
+  elevation: '3,747 m',
+  coordinates: '45°28’06’’N / 6°54’20’’E',
+  account: 'UO5cVq2j6M',
+  forcast: '0d6c0f0b-4f21-4d55-b558-f1b01aab314a',
+  GMT: -5
+}, {
+  resort: 'tp2cervinia',
+  name: 'CERVINIA',
+  country: 'VALLE D’AOSTA, ITALY',
+  elevation: '3,480 m',
+  coordinates: '45°56’04’’N / 7°37’52’’E',
+  account: 'Lbg2TKgReP',
+  forcast: '0d67439b-ec53-4619-bad1-db57596949b4',
+  GMT: -5
 }];
 
 var account = resorts[0].account;
@@ -242,6 +314,7 @@ var country = resorts[0].country;
 var coordinates = resorts[0].coordinates;
 var GMT = 2;
 var show = 'last-snowfall';
+var elevation = resorts[0].elevation;
 var defaultColor = 'b6092a';
 var query = window.location.search.replace('?','').split('&');
 var fetchEveryXMinutes = 15;
@@ -291,6 +364,7 @@ for(var i=0; i<query.length; i++) {
           country = resorts[i].country;
           coordinates = resorts[i].coordinates;
           GMT = resorts[i].GMT;
+          elevation = resorts[i].elevation;
         }
       }
       break;
@@ -324,11 +398,19 @@ function getForeCast() {
     xhr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         var result = JSON.parse(this.response);
+        console.log('getForeCast', result);
         if(result.weather && result.weather.current_weather) {
           var string = 'High: '+result.weather.forecast[0].day_max_temp+'&deg;'+result.weather.forecast[0].temp_unit;
           string += ' / Low: '+result.weather.forecast[0].night_min_temp+'&deg;'+result.weather.forecast[0].temp_unit;
           document.querySelector('#current-temp .content').innerHTML = localStorage[resort+'currentTemp'] = result.weather.current_weather[0].temp+'&deg;';
           document.querySelector('#temp .content').innerHTML = localStorage[resort+'temp'] = string;
+          
+          if (result.weather.forecast[0].day && result.weather.forecast[0].day[0] && result.weather.forecast[0].day[0].wind) {
+            document.querySelector('#weather .wind').innerHTML = localStorage[resort+'wind'] = result.weather.forecast[0].day[0].wind[0].speed + ' km / h';
+            document.querySelector('#weather .humidity').innerHTML = localStorage[resort+'humidity'] = result.weather.forecast[0].day[0].humidity + '%';
+            document.querySelector('#weather .pressure').innerHTML = localStorage[resort+'pressure'] = result.weather.forecast[0].day[0].pressure_mb + ' mb';
+            document.querySelector('#weather .visibility').innerHTML = localStorage[resort+'visibility'] = result.weather.forecast[0].day[0].visibility_km + ' km';
+          }
         }
       }
     };
@@ -338,6 +420,10 @@ function getForeCast() {
     console.log('USING DATA FROM MAX '+fetchEveryXMinutes+' MINUTES AGO');
     document.querySelector('#current-temp .content').innerHTML = localStorage[resort+'currentTemp'];
     document.querySelector('#temp .content').innerHTML = localStorage[resort+'temp'];
+    document.querySelector('#weather .wind').innerHTML = localStorage[resort+'wind'];
+    document.querySelector('#weather .humidity').innerHTML = localStorage[resort+'humidity'];
+    document.querySelector('#weather .pressure').innerHTML = localStorage[resort+'pressure'];
+    document.querySelector('#weather .visibility').innerHTML = localStorage[resort+'visibility'];
   }
 }
 
@@ -351,6 +437,7 @@ function getSnowReport() {
     xhr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         var result = JSON.parse(this.response);
+        console.log('getSnowReport', result);
         if(result.weather && result.weather.snow_report) {
           var dateString = result.weather.snow_report[0].last_snow_date + ' ' + (new Date().getUTCFullYear());
           var date = new Date(dateString);
@@ -405,6 +492,9 @@ document.querySelector('#temp .name').innerHTML = name;
 document.querySelector('#location .name').innerHTML = name;
 document.querySelector('#location .country').innerHTML = country;
 document.querySelector('#location .coordinates').innerHTML = coordinates;
+if (elevation) {
+  document.querySelector('#elevation .elevation').innerHTML = elevation;
+}
 
 for(var i=0; i<query.length; i++) {
   var params = query[i].split('=');
@@ -415,11 +505,13 @@ for(var i=0; i<query.length; i++) {
         getSnowReport();
         break;
       case 'temp':
+      case 'weather':
       case 'current-temp':
         getForeCast();
         break;
       case 'time':
       case 'location':
+      case 'elevation':
         console.log('no need to fetch data',params[1]);
         break;
       default: alert('Please provide one of the following values to the end of the url: &show=last-snowfall, &show=snow-depth, &show=temp, &show=current-temp, &show=time, &show=location');
