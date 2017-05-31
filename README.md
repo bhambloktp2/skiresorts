@@ -113,3 +113,9 @@ GENERAL PW: th1spl4ys2
   - bob+tp2cervinia@bhamblok.be
   - account: Lbg2TKgReP
   - forcast: 0d67439b-ec53-4619-bad1-db57596949b4
+
+## YELLOW STONE NATIONAL PARK - USA - 44°33’10’’N / 110°17’30’’W / 44.5530474,-110.291748 - elevation: 2,400 m
+  - username: tp2yellowstone
+  - bob+tp2yellowstone@bhamblok.be
+  - account: Yngnlu1qVS
+  - forcast: 2388b1e9-7c5a-414c-a7cf-a346efa5754e
