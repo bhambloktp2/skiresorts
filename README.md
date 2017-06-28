@@ -119,3 +119,9 @@ GENERAL PW: th1spl4ys2
   - bob+tp2yellowstone@bhamblok.be
   - account: Yngnlu1qVS
   - forcast: 2388b1e9-7c5a-414c-a7cf-a346efa5754e
+
+## BIGGLESWADE - COTSWOLD - / 52.073627,-0.2438715 - elevation: 2,400 m
+  - username: tp2cotswold
+  - bob+th1spl4ys2@bhamblok.be
+  - account: YdeAjt80eO
+  - forcast: d48168f2-364f-4d71-9954-02067927b8db

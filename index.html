@@ -54,6 +54,27 @@ body {
 #location .right {
   float: left;
 }
+.greeting {
+  text-transform: uppercase;
+}
+
+
+.cotswold * {
+  font-family: 'Univers LT Std'; font-weight: normal; font-style: normal;
+}
+.cotswold .big {
+  font-family: 'GT Pressura'; font-weight: bold; font-style: normal;
+  font-size: 90px;
+}
+.cotswold .content.big,
+.cotswold .date {
+  font-family: 'Univers LT Std'; font-weight: bold; font-style: normal;
+  font-size: 30px;
+}
+.cotswold .greeting {
+  text-transform: none;
+}
+
 -->
 </style>
 </head>
@@ -114,7 +135,7 @@ body {
 </div>
 <div id="temp" class="hide">
   <span class="date medium oblique color"></span><br /><br />
-  <span class="greeting big color2">GOOD MORNING</span><br />
+  <span class="greeting big color2">Good Morning</span><br />
   <span class="name big color2"></span><span class="big color2">...</span><br /><br /><br />
   <svg version="1.1" id="temp-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   	 viewBox="0 0 99.6 229.1" style="enable-background:new 0 0 99.6 229.1;" xml:space="preserve">
@@ -279,7 +300,7 @@ var resorts = [{
   GMT: +8
 }, {
   resort: 'tp2killimanjaro',
-  name: 'KILLIMANJARO',
+  name: 'KILIMANJARO',
   country: 'TANZANIA',
   elevation: '5,895 m',
   coordinates: '03°04’33’’S / 37°21’12’’E',
@@ -312,6 +333,14 @@ var resorts = [{
   coordinates: '44°33’10’’N / 110°17’30’’W',
   account: 'Yngnlu1qVS',
   forcast: '2388b1e9-7c5a-414c-a7cf-a346efa5754e',
+  GMT: -6
+}, {
+  resort: 'tp2cotswold',
+  name: 'Biggleswade',
+  country: 'Cotswold',
+  coordinates: '52.073627,-0.2438715',
+  account: 'YdeAjt80eO',
+  forcast: 'd48168f2-364f-4d71-9954-02067927b8db',
   GMT: -6
 }];
 
@@ -378,6 +407,10 @@ for(var i=0; i<query.length; i++) {
       }
       break;
   }
+}
+
+if (resort === 'tp2cotswold') {
+  document.body.classList.add('cotswold');
 }
 
 (function() {
@@ -484,8 +517,12 @@ function setTime() {
   var minutes = date.getMinutes();
   document.querySelector('#time .content').innerHTML = (hour < 10? '0' : '' ) + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
   document.querySelector('#time .am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
-  if ((hour > 11) && (greeting !== 'GOOD AFTERNOON')) {
-    greeting = 'GOOD AFTERNOON';
+  if ((hour > 11) && (greeting !== 'Good Afternoon')) {
+    greeting = 'Good Afternoon';
+    document.querySelector('.greeting').innerHTML = greeting;
+  }
+  if ((hour > 18) && (greeting !== 'Good Evening')) {
+    greeting = 'Good Evening';
     document.querySelector('.greeting').innerHTML = greeting;
   }
 }
