@@ -1,3 +1,8 @@
+> This code has to run on ANY browser!!!! (incl IE6)  
+>
+> That's why it's written in real ugly javascript.  
+> I'm a Polymer evangelist, so I'm ashamed of this code, but hey ... what do you do ...
+
 # skiresorts
 https://bhambloktp2.github.io/skiresorts/
 
