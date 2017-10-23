@@ -73,6 +73,21 @@ body {
 .cotswold .greeting {
   text-transform: none;
 }
+
+.tp2bluewater * {
+  font-family: 'MinionPro'; font-weight: normal; font-style: normal;
+}
+.tp2bluewater .big {
+  font-family: 'Tungsten'; font-weight: bold; font-style: normal;
+  text-transform: uppercase;
+  font-size: 90px;
+}
+.tp2bluewater .content.big,
+.tp2bluewater .date {
+  font-family: 'A2Type'; font-weight: bold; font-style: normal;
+  text-transform: none;
+}
+
 </style>
 </head>
 <body class="color">
@@ -349,6 +364,15 @@ var resorts = [{
   account: 'NOMb7ID6GN',
   forcast: '4793379d-fa3c-45f6-af37-81b7560a4d9d',
   GMT: +1
+}, {
+  resort: 'tp2bluewater',
+  name: 'Bluewater',
+  country: 'Bluewater',
+  elevation: '57 m',
+  coordinates: '51.4387377,0.2688127',
+  account: 'EJJKzNmMi-',
+  forcast: '1ea113fa-1e02-4e4a-81fe-a909c5845135',
+  GMT: +1
 }];
 
 var account = resorts[0].account;
@@ -417,8 +441,9 @@ for(var i=0; i<query.length; i++) {
 }
 
 // if (resort === 'tp2cotswold') {
-if (['tp2cotswold','tp2bagshot'].indexOf(resort)!==-1) {
+if (['tp2cotswold','tp2bagshot', 'tp2bluewater'].indexOf(resort)!==-1) {
   document.body.classList.add('cotswold');
+  document.body.classList.add(resort);
 }
 
 (function() {

@@ -136,3 +136,9 @@ GENERAL PW: th1spl4ys2
   - bob+tp2bagshot@bhamblok.be
   - account: NOMb7ID6GN
   - forcast: 4793379d-fa3c-45f6-af37-81b7560a4d9d
+
+## BLUEWATER - COTSWOLD - / 51.4387377,0.2688127 - elevation: 57 m
+  - username: tp2bluewater
+  - bob+tp2bluewater@bhamblok.be
+  - account: EJJKzNmMi-
+  - forcast: 1ea113fa-1e02-4e4a-81fe-a909c5845135

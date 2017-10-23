@@ -165,3 +165,32 @@ http://onlinefontconverter.com
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'Tungsten';
+	src: url('Tungsten-Semibold.eot');
+	src: url('Tungsten-Semibold.eot?#iefix') format('embedded-opentype'),
+		url('Tungsten-Semibold.woff') format('woff'),
+		url('Tungsten-Semibold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'MinionPro';
+	src: url('MinionPro-Regular.eot');
+	src: url('MinionPro-Regular.eot?#iefix') format('embedded-opentype'),
+		url('MinionPro-Regular.woff') format('woff'),
+		url('MinionPro-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'A2Type';
+	src: url('A2-Type Antwerp Light.eot');
+	src: url('A2-Type Antwerp Light.eot?#iefix') format('embedded-opentype'),
+		url('A2-Type Antwerp Light.woff') format('woff'),
+		url('A2-Type Antwerp Light.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
