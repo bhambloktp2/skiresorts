@@ -74,16 +74,20 @@ body {
   text-transform: none;
 }
 
-.tp2bluewater * {
+.tp2bluewater *,
+.tp2chertsey * {
   font-family: 'MinionPro'; font-weight: normal; font-style: normal;
 }
-.tp2bluewater .big {
+.tp2bluewater .big,
+.tp2chertsey .big {
   font-family: 'Tungsten'; font-weight: bold; font-style: normal;
   text-transform: uppercase;
   font-size: 90px;
 }
 .tp2bluewater .content.big,
-.tp2bluewater .date {
+.tp2bluewater .date,
+.tp2chertsey .content.big,
+.tp2chertsey .date {
   font-family: 'A2Type'; font-weight: bold; font-style: normal;
   text-transform: none;
 }
@@ -441,7 +445,7 @@ for(var i=0; i<query.length; i++) {
 }
 
 // if (resort === 'tp2cotswold') {
-if (['tp2cotswold','tp2bagshot', 'tp2bluewater'].indexOf(resort)!==-1) {
+if (['tp2cotswold','tp2bagshot', 'tp2bluewater', 'tp2chertsey'].indexOf(resort)!==-1) {
   document.body.classList.add('cotswold');
   document.body.classList.add(resort);
 }
