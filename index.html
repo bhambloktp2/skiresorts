@@ -82,7 +82,8 @@ body {
 .tp2chertsey .big {
   font-family: 'Tungsten'; font-weight: bold; font-style: normal;
   text-transform: uppercase;
-  font-size: 90px;
+  font-size: 70px;
+  letter-spacing: 8px;
 }
 .tp2bluewater .content.big,
 .tp2bluewater .date,
@@ -90,6 +91,22 @@ body {
 .tp2chertsey .date {
   font-family: 'A2Type'; font-weight: bold; font-style: normal;
   text-transform: none;
+  letter-spacing: 0px;
+}
+.tp2bluewater #time .big,
+.tp2chertsey #time .big {
+  font-family: 'Tungsten'; font-weight: bold; font-style: normal;
+  text-transform: uppercase;
+  font-size: 70px;
+  letter-spacing: 8px;
+}
+
+.tp2bluewater #time .am-pm,
+.tp2chertsey #time .am-pm {
+  font-family: 'Tungsten'; font-weight: bold; font-style: normal;
+  text-transform: uppercase;
+  font-size: 35px;
+  letter-spacing: 8px;
 }
 
 </style>
@@ -103,8 +120,8 @@ body {
 
 <div id="time" class="hide">
   <span class="small oblique">The Time is:<br /></span>
-  <span class="content big bold"></span>
-  <span class="small bold am-pm"></span>
+  <span class="content big bold color2"></span>
+  <span class="small bold am-pm color2"></span>
 </div>
 
 <div id="snow-depth" class="hide">
