@@ -375,7 +375,7 @@ var resorts = [{
   coordinates: '52.073627,-0.2438715',
   account: 'YdeAjt80eO',
   forcast: 'd48168f2-364f-4d71-9954-02067927b8db',
-  GMT: +1
+  GMT: +0
 }, {
   resort: 'tp2bagshot',
   name: 'Bagshot',
@@ -384,7 +384,7 @@ var resorts = [{
   coordinates: '51.3649302,-0.7248693',
   account: 'NOMb7ID6GN',
   forcast: '4793379d-fa3c-45f6-af37-81b7560a4d9d',
-  GMT: +1
+  GMT: +0
 }, {
   resort: 'tp2bluewater',
   name: 'Bluewater',
@@ -393,7 +393,7 @@ var resorts = [{
   coordinates: '51.4387377,0.2688127',
   account: 'EJJKzNmMi-',
   forcast: '1ea113fa-1e02-4e4a-81fe-a909c5845135',
-  GMT: +1
+  GMT: +0
 }];
 
 var account = resorts[0].account;
@@ -563,14 +563,12 @@ Date.prototype.getTimezone = function() {
 
 var greeting = document.querySelector('.greeting').innerHTML;
 function setTime() {
-  /*var time = new Date();
-  var date = new Date(time.getTime() + (GMT*60*60*1000));*/
+  var time = new Date();
+  var date = new Date(time.getTime() + (GMT*60*60*1000));
   // console.log((new Date()).getTimezone(), new Date().getTimezoneOffset() / 60 * -1);
   // var date = new Date(Date.now() + ((new Date().getTimezoneOffset() / 60)+GMT)*60*60*1000);
-  // var hour = date.getHours();
-  // var minutes = date.getMinutes();
-  var hour = (new Date()).getHours() + Number(GMT) - 1;
-  var minutes = (new Date()).getMinutes();
+  var hour = date.getHours();
+  var minutes = date.getMinutes();
   document.querySelector('#time .content').innerHTML = (hour < 10? '0' : '' ) + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
   document.querySelector('#time .am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
   if ((hour > 11) && (greeting !== 'Good Afternoon')) {
