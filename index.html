@@ -569,7 +569,7 @@ function setTime() {
   // var date = new Date(Date.now() + ((new Date().getTimezoneOffset() / 60)+GMT)*60*60*1000);
   // var hour = date.getHours();
   // var minutes = date.getMinutes();
-  var hour = (new Date()).getHours() + GMT - 1;
+  var hour = (new Date()).getHours() + Number(GMT) - 1;
   var minutes = (new Date()).getMinutes();
   document.querySelector('#time .content').innerHTML = (hour < 10? '0' : '' ) + hour + ':' + (minutes < 10 ? '0' : '') + minutes;
   document.querySelector('#time .am-pm').innerHTML = (hour > 11 ? 'pm' : 'am');
