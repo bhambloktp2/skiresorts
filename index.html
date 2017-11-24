@@ -75,10 +75,12 @@ body {
 }
 
 .tp2bluewater *,
+.tp2moorgate *,
 .tp2chertsey * {
   font-family: 'MinionPro'; font-weight: normal; font-style: normal;
 }
 .tp2bluewater .big,
+.tp2moorgate .big,
 .tp2chertsey .big {
   font-family: 'Tungsten'; font-weight: bold; font-style: normal;
   text-transform: uppercase;
@@ -87,6 +89,8 @@ body {
 }
 .tp2bluewater .content.big,
 .tp2bluewater .date,
+.tp2moorgate .content.big,
+.tp2moorgate .date,
 .tp2chertsey .content.big,
 .tp2chertsey .date {
   font-family: 'A2Type'; font-weight: bold; font-style: normal;
@@ -94,6 +98,7 @@ body {
   letter-spacing: 0px;
 }
 .tp2bluewater #time .big,
+.tp2moorgate #time .big,
 .tp2chertsey #time .big {
   font-family: 'Tungsten'; font-weight: bold; font-style: normal;
   text-transform: uppercase;
@@ -102,6 +107,7 @@ body {
 }
 
 .tp2bluewater #time .am-pm,
+.tp2moorgate #time .am-pm,
 .tp2chertsey #time .am-pm {
   font-family: 'Tungsten'; font-weight: bold; font-style: normal;
   text-transform: uppercase;
@@ -394,6 +400,15 @@ var resorts = [{
   account: 'EJJKzNmMi-',
   forcast: '1ea113fa-1e02-4e4a-81fe-a909c5845135',
   GMT: +0
+}, {
+  resort: 'tp2moorgate',
+  name: 'Moorgate',
+  country: 'Moorgate',
+  elevation: '57 m',
+  coordinates: '51.4387377,0.2688127',
+  account: 'EJJKzNmMi-',
+  forcast: '1ea113fa-1e02-4e4a-81fe-a909c5845135',
+  GMT: +0
 }];
 
 var account = resorts[0].account;
@@ -462,7 +477,7 @@ for(var i=0; i<query.length; i++) {
 }
 
 // if (resort === 'tp2cotswold') {
-if (['tp2cotswold','tp2bagshot', 'tp2bluewater', 'tp2chertsey'].indexOf(resort)!==-1) {
+if (['tp2cotswold','tp2bagshot', 'tp2bluewater', 'tp2chertsey', 'tp2moorgate'].indexOf(resort)!==-1) {
   document.body.classList.add('cotswold');
   document.body.classList.add(resort);
 }
